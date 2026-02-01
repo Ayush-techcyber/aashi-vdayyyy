@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Be My Valentine? 💖</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+    .card {
+      background: white;
+      padding: 40px 30px 50px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      position: relative;
+      z-index: 2;
+    }
+    h1 {
+      margin-bottom: 30px;
+      font-size: 2rem;
+      color: #ff4d6d;
+    }
+    .buttons {
+      height: 120px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+      box-shadow: 0 10px 20px rgba(255,77,109,0.4);
+    }
+
+    /* 🔥 KEY FIX */
+    #noBtn {
+      position: fixed;
+      left: 60%;
+      top: 60%;
+      background: #e0e0e0;
+      color: #333;
+      z-index: 3;
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      display: none;
+    }
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: float 3s linear forwards;
+    }
+    @keyframes float {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-120vh); opacity: 0; }
+    }
+    .message {
+      display: none;
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #ff4d6d;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Aashi will you be my Valentine?</h1>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes ur the best Ayush</button>
+    </div>
+
+    <div class="message" id="yesMessage">
+      lets go burger see u on feb 14 🍔💘
+    </div>
+  </div>
+
+  <button id="noBtn">Noooo</button>
+
+  <div class="hearts" id="hearts"></div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const hearts = document.getElementById('hearts');
+    const yesMessage = document.getElementById('yesMessage');
+
+    function moveNoButton() {
+      const padding = 20;
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
+
+    // moves BEFORE clicking
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('mousemove', moveNoButton);
+
+    yesBtn.addEventListener('click', () => {
+      yesMessage.style.display = 'block';
+      hearts.style.display = 'block';
+
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = '💖';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.bottom = '-30px';
+        hearts.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }
+    });
+  </script>
+</body>
+</html>
